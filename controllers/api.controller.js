@@ -18,7 +18,22 @@ class ApiController {
     }
     async getLinks(req, res) {
         try {
-            const links =  await cuevana.getLinks(`${req.params.id}/${req.params.name}`);
+            const links =  await cuevana.getLinks(`${req.params.id}/${req.params.name}`);            
+            return res.status(200).json({
+                statusCode: 200,
+                ok:true,
+                data:links
+            })
+        } catch (error) {
+            return res.status(500).send({
+                statusCode:500,
+                error:error
+            })
+        }
+    }
+    async getDetail(req, res) {
+        try {
+            const links =  await cuevana.getDetail(`${req.params.id}/${req.params.name}`);
             return res.status(200).json({
                 statusCode: 200,
                 ok:true,
